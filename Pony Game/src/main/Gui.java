@@ -42,132 +42,14 @@ public class Gui {
 
 				JPanel centerpanel = new JPanel();
 
-				JButton staminaButton = new JButton("Stamina");
-				JButton agilityButton = new JButton("Agility");
-				JButton logicButton = new JButton("Logic");
-				JButton creativityButton = new JButton("Creativity");
-				JButton wisdomButton = new JButton("Wisdom");
-				JButton charismaButton = new JButton("Charisma");
+				
+				ButtonPanel bp = new ButtonPanel(pc);
+				mainPanel.add(bp, BorderLayout.EAST);
 
-				staminaButton.setActionCommand("stamina");
-				agilityButton.setActionCommand("agility");
-				logicButton.setActionCommand("logic");
-				creativityButton.setActionCommand("creativity");
-				wisdomButton.setActionCommand("wisdom");
-				charismaButton.setActionCommand("charisma");
+				DisplayPanel dp = new DisplayPanel();
+				
 
-				final class MyListener implements ActionListener {
-
-					PlayerCharacter pc;
-					int difficulty = 10;
-
-					public void actionPerformed(ActionEvent e) {
-
-						switch (e.getActionCommand()) {
-						case "stamina":
-							skillCheck(e.getActionCommand(), pc.getStamina(),
-									difficulty);
-							break;
-						case "agility":
-							skillCheck(e.getActionCommand(), pc.getAgility(),
-									difficulty);
-							break;
-						case "logic":
-							skillCheck(e.getActionCommand(), pc.getLogic(),
-									difficulty);
-							break;
-						case "creativity":
-							skillCheck(e.getActionCommand(),
-									pc.getCreativity(), difficulty);
-							break;
-						case "wisdom":
-							skillCheck(e.getActionCommand(), pc.getWisdom(),
-									difficulty);
-							break;
-						case "charisma":
-							skillCheck(e.getActionCommand(), pc.getCharisma(),
-									difficulty);
-							break;
-						default:
-							break;
-						}
-
-					}
-
-					// constructor
-					public MyListener(PlayerCharacter pc) {
-						this.pc = pc;
-						System.out.println(pc.toString());
-
-					}
-
-					public void skillCheck(String attribute, int skill,
-							int difficulty) {
-						Result r = Dice.contest(skill, difficulty);
-
-						while (r.equals(Result.TIE)) {
-							r = Dice.contest(skill, difficulty);
-						}
-
-						if (r.equals(Result.FAILURE)) {
-							switch (attribute) {
-							case "stamina":
-								pc.increaseStat(AbilityType.STAMINA, 1);
-								break;
-							case "agility":
-								pc.setAgility(skill + 1);
-								break;
-							case "logic":
-								pc.setLogic(skill + 1);
-								break;
-							case "creativity":
-								pc.setCreativity(skill + 1);
-								break;
-							case "wisdom":
-								pc.setWisdom(skill + 1);
-								break;
-							case "charisma":
-								pc.setCharisma(skill + 1);
-								break;
-							default:
-								break;
-							}
-
-						} else if (r.equals(Result.SUCCESS))
-							pc.setBits(pc.getBits() + 1);
-
-					}
-
-				}
-				;
-
-				MyListener ml = new MyListener(pc);
-
-				staminaButton.addActionListener(ml);
-				agilityButton.addActionListener(ml);
-				logicButton.addActionListener(ml);
-				creativityButton.addActionListener(ml);
-				wisdomButton.addActionListener(ml);
-				charismaButton.addActionListener(ml);
-
-				JPanel buttonPanel = new JPanel();
-
-				BoxLayout b = new BoxLayout(buttonPanel, BoxLayout.Y_AXIS);
-				buttonPanel.setLayout(b);
-
-				buttonPanel.add(staminaButton);
-				buttonPanel.add(agilityButton);
-				buttonPanel.add(logicButton);
-				buttonPanel.add(creativityButton);
-				buttonPanel.add(wisdomButton);
-				buttonPanel.add(charismaButton);
-
-				mainPanel.add(buttonPanel, BorderLayout.EAST);
-
-				JPanel displayPanel = new JPanel();
-				JLabel displayLabel = new JLabel("Display Label");
-
-				mainPanel.add(displayPanel, BorderLayout.SOUTH);
+				mainPanel.add(dp, BorderLayout.SOUTH);
 
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
