@@ -1,8 +1,11 @@
 package main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -10,17 +13,26 @@ import mechanics.Calender;
 
 public class CalenderPanel extends JPanel implements Observer {
 
-	Calender	c;
+	Calender			c;
 
-	JLabel	yearLabel		= new JLabel();
-	JLabel	monthLabel		= new JLabel();
-	JLabel	weekLabel		= new JLabel();
-	JLabel	dayLabel			= new JLabel();
-	JLabel	timeOfDayLabel	= new JLabel();
+	JLabel			yearLabel			= new JLabel();
+	JLabel			monthLabel			= new JLabel();
+	JLabel			weekLabel			= new JLabel();
+	JLabel			dayLabel				= new JLabel();
+	JLabel			timeOfDayLabel		= new JLabel();
 
-	JLabel	seasonLabel		= new JLabel();
+	JLabel			seasonLabel			= new JLabel();
+
+	JButton			testButton			= new JButton("Advance");
+
+	ActionListener	advanceListener	= new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+														c.advanceTime();
+													}
+												};
 
 	public CalenderPanel( Calender input ){
+		input.addObserver(this);
 		c = input;
 
 		add(yearLabel);
@@ -30,6 +42,9 @@ public class CalenderPanel extends JPanel implements Observer {
 		add(timeOfDayLabel);
 
 		add(seasonLabel);
+
+		add(testButton);
+		testButton.addActionListener(advanceListener);
 
 		update(null, null);
 

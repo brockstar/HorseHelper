@@ -3,18 +3,11 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import mechanics.Ability.AbilityType;
-import mechanics.Dice;
-import mechanics.Dice.Result;
+import mechanics.Calender;
 import characters.PlayerCharacter;
 
 public class Gui {
@@ -25,6 +18,7 @@ public class Gui {
 
 				// initialize model objects
 				PlayerCharacter pc = new PlayerCharacter();
+				Calender cal = new Calender();
 
 				// create frame
 				JFrame frame = new JFrame("Pony Game");
@@ -42,12 +36,13 @@ public class Gui {
 
 				JPanel centerpanel = new JPanel();
 
-				
+				CalenderPanel cp = new CalenderPanel(cal);
+				mainPanel.add(cp, BorderLayout.NORTH);
+
 				ButtonPanel bp = new ButtonPanel(pc);
 				mainPanel.add(bp, BorderLayout.EAST);
 
 				DisplayPanel dp = new DisplayPanel();
-				
 
 				mainPanel.add(dp, BorderLayout.SOUTH);
 

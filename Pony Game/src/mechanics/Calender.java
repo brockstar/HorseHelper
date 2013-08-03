@@ -1,8 +1,9 @@
 package mechanics;
 
 import java.util.Arrays;
+import java.util.Observable;
 
-public class Calender {
+public class Calender extends Observable {
 
 	public enum Month {
 		JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
@@ -135,11 +136,14 @@ public class Calender {
 
 	public void advanceTime() {
 		nextTime();
+		setChanged();
+		notifyObservers();
 	}
 
 	public void nextTime() {
 		int index = getTimeOfDay().index();
-		if (index++ >= TimeOfDay.values().length) {
+		index++;
+		if (index >= TimeOfDay.values().length) {
 			index = 0;
 			nextDay();
 		}
@@ -148,7 +152,8 @@ public class Calender {
 
 	public void nextDay() {
 		int index = getDay().index();
-		if (index++ >= Day.values().length) {
+		index++;
+		if (index >= Day.values().length) {
 			index = 0;
 			nextWeek();
 		}
@@ -157,7 +162,8 @@ public class Calender {
 
 	public void nextWeek() {
 		int index = getWeek().index();
-		if (index++ >= Week.values().length) {
+		index++;
+		if (index >= Week.values().length) {
 			index = 0;
 			nextMonth();
 		}
@@ -166,7 +172,8 @@ public class Calender {
 
 	public void nextMonth() {
 		int index = getMonth().index();
-		if (index++ >= Month.values().length) {
+		index++;
+		if (index >= Month.values().length) {
 			index = 0;
 			nextYear();
 		}
