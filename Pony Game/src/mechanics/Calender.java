@@ -12,6 +12,14 @@ public class Calender {
 			output = Integer.valueOf(Arrays.asList(Month.values()).indexOf(this));
 			return output;
 		}
+
+		public String print() {
+			return toString().charAt(0) + toString().substring(1).toLowerCase();
+		}
+
+		public String abbreviation() {
+			return toString().substring(0, 2);
+		}
 	}
 
 	public enum Week {
@@ -22,6 +30,25 @@ public class Calender {
 			output = Integer.valueOf(Arrays.asList(Week.values()).indexOf(this));
 			return output;
 		}
+
+		public String print() {
+			return toString().charAt(0) + toString().substring(1).toLowerCase();
+		}
+
+		public String abbreviation() {
+			switch (this) {
+				case FIRST:
+					return "1st";
+				case SECOND:
+					return "2nd";
+				case THIRD:
+					return "3rd";
+				case FOURTH:
+					return "4th";
+				default:
+					return "";
+			}
+		}
 	}
 
 	public enum Day {
@@ -31,6 +58,14 @@ public class Calender {
 			int output = 0;
 			output = Integer.valueOf(Arrays.asList(Day.values()).indexOf(this));
 			return output;
+		}
+
+		public String print() {
+			return toString().charAt(0) + toString().substring(1).toLowerCase();
+		}
+
+		public String abbreviation() {
+			return toString().substring(0, 2);
 		}
 	}
 
@@ -43,10 +78,37 @@ public class Calender {
 					this));
 			return output;
 		}
+
+		public String print() {
+			return toString().charAt(0) + toString().substring(1).toLowerCase();
+		}
+
+		public String abbreviation() {
+			switch (this) {
+				case MORNING:
+					return "A.M.";
+				case NOON:
+					return "NOON";
+				case AFTERNOON:
+					return "P.M.";
+				case EVENING:
+					return "NIGHT";
+				default:
+					return "";
+			}
+		}
 	}
 
 	public enum Season {
 		SPRING, SUMMER, AUTUMN, WINTER;
+
+		public String print() {
+			return toString().charAt(0) + toString().substring(1).toLowerCase();
+		}
+
+		public String abbreviation() {
+			return toString().substring(0, 2);
+		}
 	}
 
 	int			year;
