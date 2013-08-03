@@ -10,7 +10,7 @@ public class Dice {
 		return (int) (Math.random() * score) + 1;
 	}
 
-	public Result contest(int playerScore, int difficulty) {
+	public static Result contest(int playerScore, int difficulty) {
 		Result outcome;
 		int playerRoll = roll(playerScore);
 		int opponentRoll = roll(difficulty);
