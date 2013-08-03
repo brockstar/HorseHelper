@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import mechanics.Ability.AbilityType;
 import mechanics.Dice;
 import mechanics.Dice.Result;
 import characters.PlayerCharacter;
@@ -111,7 +112,7 @@ public class Gui {
 						if (r.equals(Result.FAILURE)) {
 							switch (attribute) {
 							case "stamina":
-								pc.setStamina(skill + 1);
+								pc.increaseStat(AbilityType.STAMINA, 1);
 								break;
 							case "agility":
 								pc.setAgility(skill + 1);

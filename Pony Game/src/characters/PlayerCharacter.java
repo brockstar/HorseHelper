@@ -2,48 +2,74 @@ package characters;
 
 import java.util.Observable;
 
+import mechanics.Ability.AbilityType;
+
 public class PlayerCharacter extends Observable {
 
-	private String name = "PC Pony";
+	private String	name			= "PC Pony";
 
-	private int stamina = 2;
-	private int agility = 2;
+	private int		stamina		= 2;
+	private int		agility		= 2;
 
-	private int logic = 2;
-	private int creativity = 2;
+	private int		logic			= 2;
+	private int		creativity	= 2;
 
-	private int wisdom = 2;
-	private int charisma = 2;
+	private int		wisdom		= 2;
+	private int		charisma		= 2;
 
-	private int honesty = 0;
-	private int kindness = 0;
-	private int laughter = 0;
-	private int generocity = 0;
-	private int loyalty = 0;
-	private int magic = 0;
+	private int		honesty		= 0;
+	private int		kindness		= 0;
+	private int		laughter		= 0;
+	private int		generocity	= 0;
+	private int		loyalty		= 0;
+	private int		magic			= 0;
 
-	private int bits = 0;
-	private int gems = 0;
-	
-	private void changed(){
+	private int		bits			= 0;
+	private int		gems			= 0;
+
+	private void changed() {
 		setChanged();
 		notifyObservers();
 	}
-	
-	public void setStamina(int input){
+
+	public void increaseStat(AbilityType type, int amount) {
+		switch (type) {
+			case STAMINA:
+				setStamina(getStamina() + amount);
+				break;
+			case AGILITY:
+				setAgility(getAgility() + amount);
+				break;
+			case LOGIC:
+				setLogic(getLogic() + amount);
+				break;
+			case CREATIVITY:
+				setCreativity(getCreativity() + amount);
+				break;
+			case WISDOM:
+				setWisdom(getWisdom() + amount);
+				break;
+			case CHARISMA:
+				setCharisma(getCharisma() + amount);
+				break;
+			default: // do nothing;
+				break;
+		}
+	}
+
+	public void setStamina(int input) {
 		this.stamina = input;
 		changed();
 	}
-	
 
-	public int getStamina(){
+	public int getStamina() {
 		return Integer.valueOf(stamina);
 	}
 
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 		changed();
@@ -165,5 +191,5 @@ public class PlayerCharacter extends Observable {
 		this.gems = gems;
 		changed();
 	}
-	
+
 }
