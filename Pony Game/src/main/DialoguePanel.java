@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,7 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -21,32 +22,28 @@ import mechanics.Dialogue;
 @SuppressWarnings("serial")
 public class DialoguePanel extends JPanel implements Observer {
 
-	Dialogue currentDialogue;
+	Dialogue		currentDialogue;
 
-	JPanel topPanel = new JPanel();
-	JPanel sayingsPanel = new JPanel();
+	JPanel		topPanel			= new JPanel();
+	JEditorPane	sayingsPane	= new JEditorPane();
+	JScrollPane	sc					= new JScrollPane(sayingsPane);
 
-	JScrollPane sc = new JScrollPane(sayingsPanel);
+	Box			bottomPanel		= Box.createHorizontalBox();
 
-	Box bottomPanel = Box.createHorizontalBox();
-
-	public DialoguePanel() {
+	public DialoguePanel(){
 		setLayout(new BorderLayout());
 
 		topPanel.setLayout(new GridLayout(0, 1));
-		sc.setPreferredSize(new Dimension(100, 100));
+
 		topPanel.setBorder(BorderFactory.createTitledBorder("Conversation"));
 		topPanel.add(sc);
 
-		sayingsPanel.setLayout(new BoxLayout(sayingsPanel, BoxLayout.Y_AXIS));
-
 		add(topPanel, BorderLayout.CENTER);
-		
+
 		bottomPanel = Box.createHorizontalBox();
 		bottomPanel.setBorder(BorderFactory.createTitledBorder("Options"));
-		
-		add(bottomPanel, BorderLayout.SOUTH);
 
+		add(bottomPanel, BorderLayout.SOUTH);
 
 	}
 
@@ -64,18 +61,12 @@ public class DialoguePanel extends JPanel implements Observer {
 			clearPanels();
 		} else {
 
-			JPanel say = new JPanel();
-			
-			say.setBorder(BorderFactory
-					.createTitledBorder(dialogue.characterName));
-			JLabel sayLabel = new JLabel(dialogue.text);
-			say.add(sayLabel);
-			sayingsPanel.add(say);
+			sayingsPane.setText(sayingsPane.getText() + dialogue.characterName + ":\n\t" + dialogue.text + "\n");
 
 			bottomPanel.removeAll();
 
 			if (dialogue.options == null) {
-				
+
 				JButton b = new JButton("Done");
 				ActionListener a = new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -84,7 +75,7 @@ public class DialoguePanel extends JPanel implements Observer {
 				};
 				b.addActionListener(a);
 				bottomPanel.add(b);
-				
+
 			} else {
 				for (Dialogue d : dialogue.options) {
 					JButton b = new JButton(d.optionName);
@@ -102,7 +93,7 @@ public class DialoguePanel extends JPanel implements Observer {
 
 	public void clearPanels() {
 
-		sayingsPanel.removeAll();
+		sayingsPane.setText("");
 		bottomPanel.removeAll();
 
 		revalidate();
@@ -112,7 +103,7 @@ public class DialoguePanel extends JPanel implements Observer {
 
 	private class ButtonListener extends Observable implements ActionListener {
 
-		Dialogue d;
+		Dialogue	d;
 
 		public void actionPerformed(ActionEvent e) {
 			runDialogue(d);
