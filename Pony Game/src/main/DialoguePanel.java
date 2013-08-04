@@ -21,14 +21,14 @@ import mechanics.Dialogue;
 @SuppressWarnings("serial")
 public class DialoguePanel extends JPanel implements Observer {
 
-	Dialogue	currentDialogue;
+	Dialogue currentDialogue;
 
-	JPanel		topPanel		= new JPanel();
-	JPanel		sayingsPanel	= new JPanel();
+	JPanel topPanel = new JPanel();
+	JPanel sayingsPanel = new JPanel();
 
-	JScrollPane	sc				= new JScrollPane(sayingsPanel);
+	JScrollPane sc = new JScrollPane(sayingsPanel);
 
-	Box			bottomPanel		= Box.createHorizontalBox();
+	Box bottomPanel = Box.createHorizontalBox();
 
 	public DialoguePanel() {
 		setLayout(new BorderLayout());
@@ -41,10 +41,12 @@ public class DialoguePanel extends JPanel implements Observer {
 		sayingsPanel.setLayout(new BoxLayout(sayingsPanel, BoxLayout.Y_AXIS));
 
 		add(topPanel, BorderLayout.CENTER);
-		add(bottomPanel, BorderLayout.SOUTH);
-
+		
 		bottomPanel = Box.createHorizontalBox();
 		bottomPanel.setBorder(BorderFactory.createTitledBorder("Options"));
+		
+		add(bottomPanel, BorderLayout.SOUTH);
+
 
 	}
 
@@ -63,10 +65,9 @@ public class DialoguePanel extends JPanel implements Observer {
 		} else {
 
 			JPanel say = new JPanel();
-			say.setPreferredSize(new Dimension(400, 50));
-			say.setMaximumSize(new Dimension(400, 50));
-			say.setMinimumSize(new Dimension(300, 100));
-			say.setBorder(BorderFactory.createTitledBorder(dialogue.characterName));
+			
+			say.setBorder(BorderFactory
+					.createTitledBorder(dialogue.characterName));
 			JLabel sayLabel = new JLabel(dialogue.text);
 			say.add(sayLabel);
 			sayingsPanel.add(say);
@@ -74,28 +75,25 @@ public class DialoguePanel extends JPanel implements Observer {
 			bottomPanel.removeAll();
 
 			if (dialogue.options == null) {
+				
 				JButton b = new JButton("Done");
 				ActionListener a = new ActionListener() {
-
 					public void actionPerformed(ActionEvent arg0) {
 						runDialogue(null);
 					}
-
 				};
 				b.addActionListener(a);
 				bottomPanel.add(b);
+				
 			} else {
-
 				for (Dialogue d : dialogue.options) {
 					JButton b = new JButton(d.optionName);
-					ButtonListener l = new ButtonListener(this);
+					ButtonListener l = new ButtonListener();
 					l.d = d;
 					b.addActionListener(l);
 					bottomPanel.add(b);
 				}
-
 			}
-			add(bottomPanel, BorderLayout.SOUTH);
 
 			revalidate();
 			repaint();
@@ -114,12 +112,7 @@ public class DialoguePanel extends JPanel implements Observer {
 
 	private class ButtonListener extends Observable implements ActionListener {
 
-		// DialoguePanel p;
-		Dialogue	d;
-
-		public ButtonListener(DialoguePanel p) {
-			// this.p = p;
-		}
+		Dialogue d;
 
 		public void actionPerformed(ActionEvent e) {
 			runDialogue(d);
