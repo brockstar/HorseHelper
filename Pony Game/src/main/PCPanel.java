@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,27 +14,29 @@ import characters.PlayerCharacter;
 @SuppressWarnings("serial")
 public class PCPanel extends JPanel implements Observer {
 
-	PlayerCharacter	pc;
-	JLabel				playerNameLabel	= new JLabel("PlayerName");
-	JLabel				staminaLabel		= new JLabel("Stamina:");
-	JLabel				agilityLabel		= new JLabel("Agility:");
-	JLabel				logicLabel			= new JLabel("Logic: ");
-	JLabel				creativityLabel	= new JLabel("Creativity: ");
-	JLabel				wisdomLabel			= new JLabel("Wisdom: ");
-	JLabel				charismaLabel		= new JLabel("Charisma: ");
-	
-	JLabel				bitsLabel			= new JLabel("Bits: ");
+	PlayerCharacter			pc;
+	JLabel					playerNameLabel	= new JLabel("PlayerName");
+	JLabel					staminaLabel	= new JLabel("Stamina:");
+	JLabel					agilityLabel	= new JLabel("Agility:");
+	JLabel					logicLabel		= new JLabel("Logic: ");
+	JLabel					creativityLabel	= new JLabel("Creativity: ");
+	JLabel					wisdomLabel		= new JLabel("Wisdom: ");
+	JLabel					charismaLabel	= new JLabel("Charisma: ");
 
-	
+	JLabel					bitsLabel		= new JLabel("Bits: ");
 
-	public PCPanel( PlayerCharacter inputPC ){
+	final static Dimension	PREFERRED		= new Dimension(150, 50);
+
+	public PCPanel(PlayerCharacter inputPC) {
 		inputPC.addObserver(this);
 		this.pc = inputPC;
+
+		setPreferredSize(PREFERRED);
 		setBorder(BorderFactory.createTitledBorder("Player Character Panel"));
 
-		BoxLayout b = new BoxLayout(this,BoxLayout.Y_AXIS);
+		BoxLayout b = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(b);
-		
+
 		add(playerNameLabel);
 		add(staminaLabel);
 		add(agilityLabel);
@@ -42,8 +45,6 @@ public class PCPanel extends JPanel implements Observer {
 		add(wisdomLabel);
 		add(charismaLabel);
 		add(bitsLabel);
-		
-				
 
 		update(null, null);
 	}
@@ -56,9 +57,8 @@ public class PCPanel extends JPanel implements Observer {
 		creativityLabel.setText("Creativity: " + pc.getCreativity());
 		wisdomLabel.setText("Wisdom: " + pc.getWisdom());
 		charismaLabel.setText("Charisma: " + pc.getCharisma());
-		
+
 		bitsLabel.setText("Bits: " + pc.getBits());
-		
 
 		revalidate();
 		repaint();

@@ -20,7 +20,7 @@ public class DisplayPanel extends JPanel implements Observer {
 		gs.pc.addObserver(this);
 		gs.cal.addObserver(this);
 		setLayout(new GridLayout(0, 1));
-		sp.setPreferredSize(new Dimension(100, 100));
+		sp.setPreferredSize(new Dimension(300, 300));
 		add(sp);
 
 	}

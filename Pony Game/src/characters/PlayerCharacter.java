@@ -98,9 +98,10 @@ public class PlayerCharacter extends Observable {
 		return Integer.valueOf(logic);
 	}
 
-	public void setLogic(int logic) {
-		this.logic = logic;
-		changed();
+	public void setLogic(int input) {
+		int oldValue = getLogic();
+		this.logic = input;
+		changed(new ChangePacket(AbilityType.LOGIC, oldValue, getLogic()));
 	}
 
 	public int getCreativity() {
@@ -108,8 +109,9 @@ public class PlayerCharacter extends Observable {
 	}
 
 	public void setCreativity(int creativity) {
+		int oldValue = getCreativity();
 		this.creativity = creativity;
-		changed();
+		changed(new ChangePacket(AbilityType.CREATIVITY, oldValue, getCreativity()));
 	}
 
 	public int getWisdom() {

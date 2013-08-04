@@ -18,25 +18,26 @@ import javax.swing.JScrollPane;
 
 import mechanics.Dialogue;
 
+@SuppressWarnings("serial")
 public class DialoguePanel extends JPanel implements Observer {
 
-	JPanel		topPanel			= new JPanel();
-	JPanel		dialoguePanel	= new JPanel();
+	JPanel		topPanel		= new JPanel();
+	JPanel		sayingsPanel	= new JPanel();
 
-	JScrollPane	sc					= new JScrollPane(dialoguePanel);
+	JScrollPane	sc				= new JScrollPane(sayingsPanel);
 
 	Box			bottomPanel		= Box.createHorizontalBox();
 
-	public DialoguePanel(){
+	public DialoguePanel() {
 		setLayout(new BorderLayout());
 
 		topPanel.setLayout(new GridLayout(0, 1));
 		sc.setPreferredSize(new Dimension(100, 100));
 		topPanel.add(sc);
 
-		dialoguePanel.setLayout(new BoxLayout(dialoguePanel, BoxLayout.Y_AXIS));
+		sayingsPanel.setLayout(new BoxLayout(sayingsPanel, BoxLayout.Y_AXIS));
 
-		add(topPanel, (BorderLayout.NORTH));
+		add(topPanel, BorderLayout.CENTER);
 		add(bottomPanel, BorderLayout.SOUTH);
 
 	}
@@ -54,20 +55,22 @@ public class DialoguePanel extends JPanel implements Observer {
 		say.setBorder(BorderFactory.createTitledBorder(dialogue.characterName));
 		JLabel sayLabel = new JLabel(dialogue.text);
 		say.add(sayLabel);
-		dialoguePanel.add(say);
+		sayingsPanel.add(say);
 
 		bottomPanel = Box.createHorizontalBox();
-
+		bottomPanel.setBorder(BorderFactory.createTitledBorder("Options"));
+		
 		for (Dialogue d : dialogue.options) {
 			JButton b = new JButton(d.optionName);
 			ButtonListener l = new ButtonListener(this);
 			b.addActionListener(l);
 			bottomPanel.add(b);
 		}
+		add(bottomPanel, BorderLayout.SOUTH);
 	}
 
 	public void clearPanels() {
-		dialoguePanel = new JPanel();
+		sayingsPanel = new JPanel();
 		bottomPanel = Box.createHorizontalBox();
 	}
 
@@ -75,7 +78,7 @@ public class DialoguePanel extends JPanel implements Observer {
 
 		DialoguePanel	p;
 
-		public ButtonListener( DialoguePanel p ){
+		public ButtonListener(DialoguePanel p) {
 			this.p = p;
 		}
 

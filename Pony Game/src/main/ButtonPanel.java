@@ -7,10 +7,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import abilities.Ability.AbilityType;
-
 import mechanics.Dice;
 import mechanics.Dice.Result;
+import abilities.Ability.AbilityType;
 import characters.PlayerCharacter;
 
 @SuppressWarnings("serial")
@@ -18,13 +17,15 @@ public class ButtonPanel extends JPanel {
 	
 	PlayerCharacter pc;
 	
-	JButton staminaButton = new JButton("Stamina");
-	JButton agilityButton = new JButton("Agility");
-	JButton logicButton = new JButton("Logic");
-	JButton creativityButton = new JButton("Creativity");
-	JButton wisdomButton = new JButton("Wisdom");
-	JButton charismaButton = new JButton("Charisma");
+	JButton staminaButton = new StandardButton("Stamina");
+	JButton agilityButton = new StandardButton("Agility");
+	JButton logicButton = new StandardButton("Logic");
+	JButton creativityButton = new StandardButton("Creativity");
+	JButton wisdomButton = new StandardButton("Wisdom");
+	JButton charismaButton = new StandardButton("Charisma");
 
+	
+	
 	
 
 	final class MyListener implements ActionListener {
@@ -140,6 +141,7 @@ public class ButtonPanel extends JPanel {
 		BoxLayout b = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(b);
 
+		
 		add(staminaButton);
 		add(agilityButton);
 		add(logicButton);
