@@ -7,8 +7,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import mechanics.GameDate;
-import characters.PlayerCharacter;
+import mechanics.Dialogue;
 
 public class Gui {
 
@@ -18,11 +17,11 @@ public class Gui {
 
 				// initialize model objects
 				Gamestate gs = new Gamestate();
-				
+
 				// create frame
 				JFrame frame = new JFrame("Pony Game");
 
-				frame.setSize(new Dimension(500, 300));
+				frame.setSize(new Dimension(700, 700));
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 				// create content panel
@@ -33,7 +32,9 @@ public class Gui {
 
 				mainPanel.add(pcPanel, BorderLayout.WEST);
 
-				JPanel centerpanel = new JPanel();
+				DialoguePanel dialoguePanel = new DialoguePanel();
+				mainPanel.add(dialoguePanel, BorderLayout.CENTER);
+				dialoguePanel.update(null, Gui.createTestDialogue());
 
 				CalenderPanel cp = new CalenderPanel(gs.cal);
 				mainPanel.add(cp, BorderLayout.NORTH);
@@ -51,5 +52,15 @@ public class Gui {
 			}
 		};
 		EventQueue.invokeLater(runner);
+	}
+
+	public static Dialogue createTestDialogue() {
+
+		Dialogue output = new Dialogue("Test", "Narrator",
+				"I sure love playing video games!");
+		output.addOption(new Dialogue("Okay", "Player Character",
+				"I hate video games."));
+
+		return output;
 	}
 }

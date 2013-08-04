@@ -15,7 +15,7 @@ public class DisplayPanel extends JPanel implements Observer {
 	JEditorPane	ep	= new JEditorPane();
 	JScrollPane	sp	= new JScrollPane(ep);
 
-	public DisplayPanel(Gamestate gs) {
+	public DisplayPanel( Gamestate gs ){
 		this.gs = gs;
 		gs.pc.addObserver(this);
 		gs.cal.addObserver(this);
@@ -40,9 +40,9 @@ public class DisplayPanel extends JPanel implements Observer {
 		ep.setText(ep.getText() + text);
 	}
 
-public String buildText(ChangePacket packet){
-	return "\n" + packet.at.toString() + "has increased from " + packet.oldValue + " to " + packet.newValue + ".";
-}
-
+	public String buildText(ChangePacket packet) {
+		return "\n" + packet.at.toString() + "has increased from "
+				+ packet.oldValue + " to " + packet.newValue + ".";
+	}
 
 }
