@@ -1,6 +1,6 @@
 package characters;
 
-import mechanics.Ability.AbilityType;
+import abilities.Ability.AbilityType;
 
 public class RainbowDash implements Workable {
 

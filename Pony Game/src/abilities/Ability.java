@@ -1,27 +1,17 @@
-package mechanics;
+package abilities;
 
-public abstract class Ability {
+public class Ability {
 
 	public enum AbilityType {
 		STAMINA, AGILITY, LOGIC, CREATIVITY, WISDOM, CHARISMA;
 	}
 
-	AbilityType	type;
-	int			value;
+	public AbilityType	type;
+	public int			value;
 
-	public class Stamina extends Ability {
-		public Stamina( int value ){
-			this.type = AbilityType.STAMINA;
-			this.value = value;
-		}
-	}
+	
 
-	public class Agility extends Ability {
-		public Agility( int value ){
-			this.type = AbilityType.AGILITY;
-			this.value = value;
-		}
-	}
+	
 
 	public class Logic extends Ability {
 		public Logic( int value ){

@@ -1,5 +1,6 @@
 package mechanics;
 
+import abilities.Ability;
 import characters.PlayerCharacter;
 
 public class Activity {

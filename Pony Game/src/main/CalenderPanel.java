@@ -9,11 +9,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import mechanics.Calender;
+import mechanics.GameDate;
 
 public class CalenderPanel extends JPanel implements Observer {
 
-	Calender			c;
+	GameDate			c;
 
 	JLabel			yearLabel			= new JLabel();
 	JLabel			monthLabel			= new JLabel();
@@ -31,7 +31,7 @@ public class CalenderPanel extends JPanel implements Observer {
 													}
 												};
 
-	public CalenderPanel( Calender input ){
+	public CalenderPanel( GameDate input ){
 		input.addObserver(this);
 		c = input;
 

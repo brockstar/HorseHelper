@@ -3,7 +3,7 @@ package mechanics;
 import java.util.Arrays;
 import java.util.Observable;
 
-public class Calender extends Observable {
+public class GameDate extends Observable {
 
 	public enum Month {
 		JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER;
@@ -120,11 +120,11 @@ public class Calender extends Observable {
 
 	Season		season;
 
-	public Calender(){
+	public GameDate(){
 		this(1, Month.MARCH, Week.FIRST, Day.SUNDAY, TimeOfDay.NOON);
 	}
 
-	public Calender( int aYear,Month aMonth,Week aWeek,Day aDay,
+	public GameDate( int aYear,Month aMonth,Week aWeek,Day aDay,
 			TimeOfDay aTimeOfDay ){
 		this.year = aYear;
 		this.month = aMonth;

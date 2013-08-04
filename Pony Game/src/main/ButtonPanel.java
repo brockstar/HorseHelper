@@ -7,7 +7,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import mechanics.Ability.AbilityType;
+import abilities.Ability.AbilityType;
+
 import mechanics.Dice;
 import mechanics.Dice.Result;
 import characters.PlayerCharacter;

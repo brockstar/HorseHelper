@@ -1,7 +1,7 @@
 package characters;
 
-import mechanics.Ability;
-import mechanics.Ability.AbilityType;
+import abilities.Ability;
+import abilities.Ability.AbilityType;
 
 public class Applejack implements Workable {
 

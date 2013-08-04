@@ -2,7 +2,11 @@ package characters;
 
 import java.util.Observable;
 
-import mechanics.Ability.AbilityType;
+import main.ChangePacket;
+import abilities.Ability.AbilityType;
+import abilities.Agility;
+import abilities.Stamina;
+
 
 public class PlayerCharacter extends Observable {
 
@@ -27,11 +31,15 @@ public class PlayerCharacter extends Observable {
 	private int		bits			= 0;
 	private int		gems			= 0;
 
+	private void changed(ChangePacket cp) {
+		setChanged();
+		notifyObservers(cp);
+	}
+
 	private void changed() {
 		setChanged();
 		notifyObservers();
 	}
-
 	public void increaseStat(AbilityType type, int amount) {
 		switch (type) {
 			case STAMINA:
@@ -58,8 +66,9 @@ public class PlayerCharacter extends Observable {
 	}
 
 	public void setStamina(int input) {
+		int oldValue = getStamina();
 		this.stamina = input;
-		changed();
+		changed(new ChangePacket(AbilityType.STAMINA, oldValue, getStamina()));
 	}
 
 	public int getStamina() {
@@ -79,9 +88,10 @@ public class PlayerCharacter extends Observable {
 		return Integer.valueOf(agility);
 	}
 
-	public void setAgility(int agility) {
-		this.agility = agility;
-		changed();
+	public void setAgility(int input) {
+		int oldValue = getAgility();
+		this.agility = input;
+		changed(new ChangePacket(AbilityType.AGILITY, oldValue, getAgility()));
 	}
 
 	public int getLogic() {
